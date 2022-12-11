@@ -37,7 +37,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\boardCon.cs" />
+     <Compile Include="Assets\Scripts\SOcode\space.cs" />
      <Compile Include="Assets\Scripts\autokill.cs" />
+     <Compile Include="Assets\Scripts\mapCameraController.cs" />
+     <Compile Include="Assets\Scripts\spaceHandler.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity 2021.3.15f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -653,11 +656,17 @@
     <Reference Include="System.Xml.Serialization">
         <HintPath>C:\Program Files\Unity 2021.3.15f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+        <HintPath>C:\Users\MELIRL\j\Motherborders\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>C:\Users\MELIRL\j\Motherborders\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core.Analytics">
         <HintPath>C:\Users\MELIRL\j\Motherborders\Library\ScriptAssemblies\Unity.Services.Core.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+        <HintPath>C:\Users\MELIRL\j\Motherborders\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>C:\Users\MELIRL\j\Motherborders\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
