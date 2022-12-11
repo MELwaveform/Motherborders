@@ -21,6 +21,8 @@ public class boardCon : MonoBehaviour
     public Camera mCam;
     public LayerMask spaceLayer;
 
+    public GameObject terra;
+
     public GameObject activeSpace = null;
 
     // Start is called before the first frame update
@@ -31,17 +33,22 @@ public class boardCon : MonoBehaviour
         {
             for(var j = 0; j < 5; j++)
             {
-                
+                //instantiate the spaces.
+                //Instantiate the models of the triangular bases themselves. These prefabs contain the 
                 x++;
-                var g = Instantiate(triKai.baseModel,new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor), Quaternion.identity);   
-                g.GetComponent<spaceHandler>().SID=x;
+                //var g = Instantiate(triKai.baseModel,new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor), Quaternion.identity);   
+                var g = Instantiate(triKai.baseModel);
+                g.transform.localPosition = new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor);
+                SpaceObject so =  g.GetComponent<SpaceObject>();
+                so.SID = x;
+                so.space=triKai;
                 g.transform.parent=spaceCon.transform;
                 //g.GetComponent<MeshRenderer>().material=triKai.mat;
                 g.GetComponent<MeshRenderer>().material.color=Color.red;
                 //g.transform.rotation=Quaternion.Euler(90,0,0);
                 if(x%2==0)
                 {
-                    g.transform.rotation=Quaternion.Euler(0,180,0);
+                    //g.transform.rotation=Quaternion.Euler(0,180,0);
                 }
                 await waitTime(.03f);
             }
@@ -79,9 +86,14 @@ public class boardCon : MonoBehaviour
             if(Physics.Raycast(ray,out hit,Mathf.Infinity,spaceLayer))
             {
                 GameObject g = hit.transform.gameObject;
-                Debug.Log("Clicked on " + g.GetComponent<spaceHandler>().SID);
+                Debug.Log("Clicked on " + g.GetComponent<SpaceObject>().SID);
                 setActiveSpace(g);
             }
+        }
+        //debug swap mode
+        if(activeSpace!=null && Input.GetKeyDown(KeyCode.Space))
+        {
+            enableStageMode();
         }
         
     }
@@ -91,12 +103,17 @@ public class boardCon : MonoBehaviour
         //only unassign the active space if it exists.
         if(activeSpace!=null)
         {
-            activeSpace.GetComponent<MeshRenderer>().material.color=Color.red;
+            activeSpace.GetComponent<SpaceObject>().updateInactive();
             activeSpace=null;
         }
         activeSpace = s;
-        activeSpace.GetComponent<MeshRenderer>().material.color=Color.blue;
+        activeSpace.GetComponent<SpaceObject>().updateActive();
     }
+
+
+
+
+
     private async Task<Exception> waitTime(float t)
     {
         if(!Application.isPlaying) 
@@ -106,6 +123,30 @@ public class boardCon : MonoBehaviour
         {
             await Task.Delay(TimeSpan.FromSeconds(Convert.ToDouble(t)));
             return null;
+        }
+    }
+
+    public void enableStageMode()
+    {
+        Debug.Log("Enabling Stage Mode");
+        //move and enabled Terra.
+        terra.transform.position = new Vector3(activeSpace.transform.position.x,activeSpace.transform.position.y+100,activeSpace.transform.position.z);
+        terra.SetActive(true);
+        setCamera(2);
+    }
+    //set the current active vCam.
+    private void setCamera(int x)
+    {
+        switch(x)
+        {
+            case 1:
+            mapCam.Priority=100;
+            terraCam.Priority=0;
+            break;
+            case 2:
+            mapCam.Priority=0;
+            terraCam.Priority=100;
+            break;
         }
     }
 }

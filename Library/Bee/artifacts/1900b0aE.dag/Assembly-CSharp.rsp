@@ -344,7 +344,8 @@
 "Assets/Scripts/boardCon.cs"
 "Assets/Scripts/mapCameraController.cs"
 "Assets/Scripts/SOcode/space.cs"
-"Assets/Scripts/spaceHandler.cs"
+"Assets/Scripts/SpaceObject.cs"
+"Assets/Scripts/terraController.cs"
 -langversion:9.0
 
 /deterministic

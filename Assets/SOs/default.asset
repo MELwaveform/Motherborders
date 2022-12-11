@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseModel: {fileID: 3382629676015637393, guid: 8d1b7cada33db744b95164e9fc5b1df9, type: 3}
   mat: {fileID: 2100000, guid: d2cc38805f87cfb489d99d684160f40f, type: 2}
+  cube: {fileID: 460115511393589252, guid: 62d66c1ec1582744099ceb386975560e, type: 3}
+  mapTopModel: {fileID: 8705145599672581454, guid: b43b7f232af06fd4aa7d48f240259b7b, type: 3}

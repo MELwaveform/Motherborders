@@ -11,5 +11,8 @@ public class space : ScriptableObject
     public GameObject baseModel;
     public Material mat;
 
+    public GameObject cube;
+
+
     public GameObject mapTopModel;
 }
