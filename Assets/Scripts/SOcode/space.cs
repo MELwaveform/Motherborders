@@ -15,4 +15,5 @@ public class space : ScriptableObject
 
 
     public GameObject mapTopModel;
+    public GameObject gameTopModel;
 }

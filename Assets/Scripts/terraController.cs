@@ -14,16 +14,39 @@ public class terraController : MonoBehaviour
     public float zSpeed = 0f;
     public float yRotSpeed = 0f;
     public float moveSpeed = 100f;
+    public float rSpeed=10;
+    public float vSpeed=100;
+
+    public Vector3 movement; 
+    public Vector3 rotation; 
+
+    public bool isRotating= false;
+    public bool isMoving= false;
+
+    public Rigidbody rb;
     void Start()
     {
-        
+        rb = this.GetComponent<Rigidbody>();
+        rb.maxAngularVelocity=2*Mathf.PI;
     }
 
     // Update is called once per frame
     void Update()
     {
+        movement = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
+        
+        rotation = new Vector3(Input.GetAxis("Rotato"),0,0);
+        
+        if(Input.GetAxis("Rotato")==0) isRotating=false;
+        else isRotating=true;
+        if(Input.GetAxis("Vertical")==0&&Input.GetAxis("Vertical")==0) isMoving=false;
+        else isMoving=true;
+
+
+        /*
                 ////////////////////////////////////////////////////////////////////////X
         {
+            
         //acceleration controller for map camera movement, bound to WASD+QE
         //if neither OR both are pressed, decelerate to velocity = 0;
             if((!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A)) || (Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.A)))
@@ -64,7 +87,7 @@ public class terraController : MonoBehaviour
         }
         ////////////////////////////////////////////////////////////////////////Y ROTATION
         
-        
+        */
         //acceleration controller for map camera movement, bound to WASD+QE
         //if neither OR both are pressed, decelerate to velocity = 0;
         
@@ -95,6 +118,28 @@ public class terraController : MonoBehaviour
         transform.position += Time.deltaTime * zSpeed * transform.forward;  
         transform.position += Time.deltaTime * xSpeed * transform.right;     
         
-        transform.Rotate(new Vector3(0,yRotSpeed,0)*Time.deltaTime);
+        //transform.Rotate(new Vector3(0,yRotSpeed,0)*Time.deltaTime);
+        
     }
-}
+    
+    void FixedUpdate()
+    {
+        move(movement, rotation);
+    }
+
+    void move(Vector3 v,Vector3 r)
+    {
+        rb.AddRelativeForce(v*vSpeed);
+        Quaternion q = Quaternion.Euler(r*Time.deltaTime*100);
+        Debug.Log(q);
+        rb.AddForceAtPosition(r*20,new Vector3(0,0,50));
+        //rb.MoveRotation(rb.rotation*q);
+        //rb.AddRelativeTorque(r*rSpeed*10000);
+        //if(!isMoving) rb.velocity=new Vector3(rb.velocity.x*.95f,rb.velocity.y,rb.velocity.z*.95f);
+        if(!isRotating) rb.angularVelocity=new Vector3(0,0,0);
+        
+    }
+    
+    }
+
+    
