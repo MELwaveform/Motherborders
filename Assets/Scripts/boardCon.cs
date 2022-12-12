@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System;
 using System.Threading.Tasks;
 using Cinemachine;
@@ -26,8 +27,10 @@ public class boardCon : MonoBehaviour
     public GameObject activeSpace = null;
 
     // Start is called before the first frame update
-    async void Start()
+    IEnumerator Start()
     {
+        
+
         var x = 0;
         for(var i = 0; i < 5; i++)
         {
@@ -36,6 +39,7 @@ public class boardCon : MonoBehaviour
                 //instantiate the spaces.
                 //Instantiate the models of the triangular bases themselves. These prefabs contain the 
                 x++;
+                //Debug.Log("Instantiating: " + x);
                 //var g = Instantiate(triKai.baseModel,new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor), Quaternion.identity);   
                 var g = Instantiate(triKai.baseModel);
                 g.transform.localPosition = new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor);
@@ -50,13 +54,19 @@ public class boardCon : MonoBehaviour
                 {
                     //g.transform.rotation=Quaternion.Euler(0,180,0);
                 }
-                await waitTime(.03f);
+                yield return StartCoroutine(waiter(.03f));
             }
         }
     }
 
+
+    IEnumerator waiter(float f)
+    {
+        yield return new WaitForSeconds(f);
+    }
+
     // Update is called once per frame
-    async void Update()
+    void Update()
     {
         /*
         if(Time.time>nextSpawn)
@@ -114,17 +124,6 @@ public class boardCon : MonoBehaviour
 
 
 
-    private async Task<Exception> waitTime(float t)
-    {
-        if(!Application.isPlaying) 
-        {
-            throw new Exception("Bang ding ow");
-        }else 
-        {
-            await Task.Delay(TimeSpan.FromSeconds(Convert.ToDouble(t)));
-            return null;
-        }
-    }
 
     public void enableStageMode()
     {
