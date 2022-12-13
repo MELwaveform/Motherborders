@@ -23,8 +23,9 @@ public class boardCon : MonoBehaviour
     public LayerMask spaceLayer;
 
     public GameObject terra;
-
-    public GameObject activeSpace = null;
+    //if false, the game is in map mode.
+    public bool isStageMode;
+    public GameObject selectedSpace = null;
 
     // Start is called before the first frame update
     IEnumerator Start()
@@ -97,41 +98,43 @@ public class boardCon : MonoBehaviour
             {
                 GameObject g = hit.transform.gameObject;
                 Debug.Log("Clicked on " + g.GetComponent<SpaceObject>().SID);
-                setActiveSpace(g);
+                setSelectedSpace(g);
             }
         }
         //debug swap mode
-        if(activeSpace!=null && Input.GetKeyDown(KeyCode.Space))
+        if(selectedSpace!=null && Input.GetKeyDown(KeyCode.Space))
         {
-            enableStageMode();
+            enableStageMode(selectedSpace);
         }
         
     }
 
-    public void setActiveSpace(GameObject s)
+    public void setSelectedSpace(GameObject s)
     {
         //only unassign the active space if it exists.
-        if(activeSpace!=null)
+        if(selectedSpace!=null)
         {
-            activeSpace.GetComponent<SpaceObject>().updateInactive();
-            activeSpace=null;
+            selectedSpace.GetComponent<SpaceObject>().updateInactive();
+            selectedSpace=null;
         }
-        activeSpace = s;
-        activeSpace.GetComponent<SpaceObject>().updateActive();
+        selectedSpace = s;
+        selectedSpace.GetComponent<SpaceObject>().updateActive();
     }
 
 
 
 
 
-
-    public void enableStageMode()
+    //perform all functions necessary 
+    public void enableStageMode(GameObject space)
     {
         Debug.Log("Enabling Stage Mode");
         //move and enabled Terra.
-        terra.transform.position = new Vector3(activeSpace.transform.position.x,activeSpace.transform.position.y+100,activeSpace.transform.position.z);
+        terra.transform.position = new Vector3(selectedSpace.transform.position.x,selectedSpace.transform.position.y+100,selectedSpace.transform.position.z);
         terra.SetActive(true);
         setCamera(2);
+        //hand off stage enable to the space itself.
+        space.GetComponent<SpaceObject>().enableStageMode();
     }
     //set the current active vCam.
     private void setCamera(int x)

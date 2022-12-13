@@ -15,7 +15,7 @@ public class terraController : MonoBehaviour
     public float yRotSpeed = 0f;
     public float moveSpeed = 100f;
     public float rSpeed=10;
-    public float vSpeed=100;
+    public float vSpeed=10000;
 
     public Vector3 movement; 
     public Vector3 rotation; 
@@ -27,7 +27,7 @@ public class terraController : MonoBehaviour
     void Start()
     {
         rb = this.GetComponent<Rigidbody>();
-        rb.maxAngularVelocity=2*Mathf.PI;
+        rb.maxAngularVelocity=1*Mathf.PI;
     }
 
     // Update is called once per frame
@@ -35,7 +35,7 @@ public class terraController : MonoBehaviour
     {
         movement = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
         
-        rotation = new Vector3(Input.GetAxis("Rotato"),0,0);
+        rotation = new Vector3(0,Input.GetAxis("Rotato"),0);
         
         if(Input.GetAxis("Rotato")==0) isRotating=false;
         else isRotating=true;
@@ -130,14 +130,18 @@ public class terraController : MonoBehaviour
     void move(Vector3 v,Vector3 r)
     {
         rb.AddRelativeForce(v*vSpeed);
-        Quaternion q = Quaternion.Euler(r*Time.deltaTime*100);
-        Debug.Log(q);
-        rb.AddForceAtPosition(r*20,new Vector3(0,0,50));
+        //rb.velocity= new Vector3(rb.velocity.x,rb.velocity.y,rb.velocity.z);
+        //Quaternion q = Quaternion.Euler(r*Time.deltaTime*100);
+        //Debug.Log(q);
+        //Vector3 temp = transform.forward*rb.velocity.magnitude;
+        //Debug.Log(temp);
+        //rb.velocity= new Vector3(temp.x,temp.y,temp.z);
+        //rb.AddForceAtPosition(r*20,new Vector3(0,0,50));
         //rb.MoveRotation(rb.rotation*q);
-        //rb.AddRelativeTorque(r*rSpeed*10000);
+        rb.AddRelativeTorque(r*rSpeed*1000*-1);
         //if(!isMoving) rb.velocity=new Vector3(rb.velocity.x*.95f,rb.velocity.y,rb.velocity.z*.95f);
         if(!isRotating) rb.angularVelocity=new Vector3(0,0,0);
-        
+        if(!isMoving) rb.velocity= new Vector3(rb.velocity.x*.85f,rb.velocity.y,rb.velocity.z*.85f);
     }
     
     }

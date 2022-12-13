@@ -16,4 +16,6 @@ public class space : ScriptableObject
 
     public GameObject mapTopModel;
     public GameObject gameTopModel;
+
+    public List<invEntity> ePool;
 }

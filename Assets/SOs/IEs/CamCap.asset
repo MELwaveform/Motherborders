@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b031a393ab98794a857b2c324431298, type: 3}
+  m_Name: CamCap
+  m_EditorClassIdentifier: 
+  go: {fileID: 4052113456050700620, guid: ad1950f08522f4a40ba5400837c837be, type: 3}
+  threatCost: 6

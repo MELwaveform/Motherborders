@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b031a393ab98794a857b2c324431298, type: 3}
+  m_Name: barryBall
+  m_EditorClassIdentifier: 
+  go: {fileID: 7889855638260370057, guid: 23e50a4ea7619e242873aff1fee4f367, type: 3}
+  threatCost: 14

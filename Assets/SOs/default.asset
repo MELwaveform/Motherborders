@@ -17,3 +17,7 @@ MonoBehaviour:
   cube: {fileID: 460115511393589252, guid: 62d66c1ec1582744099ceb386975560e, type: 3}
   mapTopModel: {fileID: 8705145599672581454, guid: b43b7f232af06fd4aa7d48f240259b7b, type: 3}
   gameTopModel: {fileID: 2261277019467059930, guid: bad3d3eb020c3f349920996aa45628d9, type: 3}
+  ePool:
+  - {fileID: 11400000, guid: 6384c166361cae74b9bb37193eabb5fd, type: 2}
+  - {fileID: 11400000, guid: 18d04319df3a992458ba5d532461d0df, type: 2}
+  - {fileID: 11400000, guid: 7895de9c75763694fb0d2dde5b1ee8fc, type: 2}
