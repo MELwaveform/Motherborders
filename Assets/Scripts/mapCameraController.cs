@@ -15,16 +15,19 @@ public class mapCameraController : MonoBehaviour
     public float zSpeed = 0f;
     public float yRotSpeed = 0f;
     public float moveSpeed = 100f;
+
+    public boardCon bc;
     
     void Start()
     {
-        
+
     }
 
     
     void Update()
     {
         
+        {
         ////////////////////////////////////////////////////////////////////////X
         {
         //acceleration controller for map camera movement, bound to WASD+QE
@@ -116,5 +119,7 @@ public class mapCameraController : MonoBehaviour
         if(Input.GetKey(KeyCode.Q)) transform.rotate
         if(Input.GetKey(KeyCode.E)) transform.position += Time.deltaTime * moveSpeed * transform.forward; 
         */
+        }
+        
     }
 }

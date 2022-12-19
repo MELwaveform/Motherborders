@@ -287,9 +287,12 @@
 -r:"Library/Bee/artifacts/2000b0aP.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/autokill.cs"
 "Assets/Scripts/boardCon.cs"
+"Assets/Scripts/EntityObject.cs"
 "Assets/Scripts/mapCameraController.cs"
+"Assets/Scripts/SOcode/invEntity.cs"
 "Assets/Scripts/SOcode/space.cs"
 "Assets/Scripts/SpaceObject.cs"
+"Assets/Scripts/tempFriendlyObject.cs"
 "Assets/Scripts/terraController.cs"
 -langversion:9.0
 

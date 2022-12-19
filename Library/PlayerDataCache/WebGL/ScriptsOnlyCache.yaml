@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - SpaceObject
     - boardCon
+    - invEntity
     - mapCameraController
     - space
     - terraController
@@ -77,12 +78,20 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3034}
     - Class: 114
-      Script: {instanceID: 3764}
+      Script: {instanceID: 3382}
     - Class: 114
-      Script: {instanceID: 4818}
+      Script: {instanceID: 3766}
     - Class: 114
-      Script: {instanceID: 4994}
+      Script: {instanceID: 4822}
+    - Class: 114
+      Script: {instanceID: 4998}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 135
+      Script: {instanceID: 0}
+    - Class: 136
+      Script: {instanceID: 0}
+    - Class: 143
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -189,7 +198,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: 17a3e218b2c9b73a03e0a83ef2bc7041
+      Hash: 9cd299c6f4f78fa1fd6cd5d1211d32c5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpaceObject
@@ -207,13 +216,13 @@ ScriptsOnlyBuild:
     className: CinemachineCameraOffset
   - hash:
       serializedVersion: 2
-      Hash: 42b433ce1ed722dcd9808b39b5ea664a
+      Hash: f1d7e540f4f88bc83ed7787f16f59f44
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: boardCon
   - hash:
       serializedVersion: 2
-      Hash: 15b889c9f91806289364d33c67a513a7
+      Hash: a8a685a711ec6f2d9ac9d5484a8ef0cb
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: mapCameraController
@@ -429,7 +438,7 @@ ScriptsOnlyBuild:
     className: Cinemachine3rdPersonFollow
   - hash:
       serializedVersion: 2
-      Hash: 1abbf23270df38afbc48dd308a9294f0
+      Hash: 2eb6e5294d0dcccb34a0d87288968725
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: space
@@ -505,6 +514,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: a74eda0e32e830b1ccf91b812ac3975c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: invEntity
   - hash:
       serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
@@ -753,6 +768,12 @@ ScriptsOnlyBuild:
     className: CinemachineHardLockToTarget
   - hash:
       serializedVersion: 2
+      Hash: 7cb0281d94123d3a6b7bd12b1b54bc74
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EntityObject
+  - hash:
+      serializedVersion: 2
       Hash: af56f77a30c1a2da1680c736a6f5c6e8
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -807,7 +828,7 @@ ScriptsOnlyBuild:
     className: CinemachineBasicMultiChannelPerlin
   - hash:
       serializedVersion: 2
-      Hash: 15b889c9f91806289364d33c67a513a7
+      Hash: 925306470aa631c99769e2bb3bea143e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: terraController
@@ -853,6 +874,12 @@ ScriptsOnlyBuild:
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
     className: CinemachineBlendListCamera
+  - hash:
+      serializedVersion: 2
+      Hash: 498385c07862a60960927909e6d7478c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: tempFriendlyObject
   platform: 20
   scenePathNames:
   - Assets/Scenes/board.unity

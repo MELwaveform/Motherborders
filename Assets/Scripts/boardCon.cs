@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEditor;
 using System;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ public class boardCon : MonoBehaviour
     public CinemachineVirtualCamera terraCam;
     public GameObject spaceCon;
 
+
+    public bool initComplete = false;
     public Camera mCam;
     public LayerMask spaceLayer;
 
@@ -27,11 +30,20 @@ public class boardCon : MonoBehaviour
     public bool isStageMode;
     public GameObject selectedSpace = null;
 
+    public List<invEntity> fList;
+
+    public List<invEntity> fListDebug;
+
+    public List<invEntity> fListToSend = new List<invEntity> { };
+
+    public GameObject mapCL;
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
         
 
+        
         var x = 0;
         for(var i = 0; i < 5; i++)
         {
@@ -45,9 +57,14 @@ public class boardCon : MonoBehaviour
                 var g = Instantiate(triKai.baseModel);
                 g.transform.localPosition = new Vector3(i*xTriSize*.5f*triSpacingFactor,0,j*yTriSize*triSpacingFactor);
                 SpaceObject so =  g.GetComponent<SpaceObject>();
+                //pass in variables from controller GO
                 so.SID = x;
                 so.space=triKai;
+                so.bc=this;
                 g.transform.parent=spaceCon.transform;
+
+                
+                
                 //g.GetComponent<MeshRenderer>().material=triKai.mat;
                 g.GetComponent<MeshRenderer>().material.color=Color.red;
                 //g.transform.rotation=Quaternion.Euler(90,0,0);
@@ -58,6 +75,19 @@ public class boardCon : MonoBehaviour
                 yield return StartCoroutine(waiter(.03f));
             }
         }
+
+        //reset the inventity list for debug.
+        //peform fList debug ops.
+        //fList = new List<invEntity> { };
+        foreach(invEntity ie in fListDebug)
+        {
+            var iek = ScriptableObject.Instantiate(ie);
+            Debug.Log("IE name is: " + iek.name);
+            fList.Add(iek);
+        }
+        
+
+        initComplete=true;
     }
 
 
@@ -87,24 +117,31 @@ public class boardCon : MonoBehaviour
         }
         */
 
-        //ray controller for space selection
-        if(Input.GetMouseButtonDown(0))
+        //only do this if init is done.
+        if(initComplete)
         {
-            Vector3 mPos = Input.mousePosition;
-            Ray ray = mCam.ScreenPointToRay(mPos);
-            RaycastHit hit;
-            int LM = LayerMask.GetMask("spaces");
-            if(Physics.Raycast(ray,out hit,Mathf.Infinity,spaceLayer))
+            //ray controller for space selection
+            if(Input.GetMouseButtonDown(0) && !isStageMode)
             {
-                GameObject g = hit.transform.gameObject;
-                Debug.Log("Clicked on " + g.GetComponent<SpaceObject>().SID);
-                setSelectedSpace(g);
+                Vector3 mPos = Input.mousePosition;
+                Ray ray = mCam.ScreenPointToRay(mPos);
+                RaycastHit hit;
+                int LM = LayerMask.GetMask("spaces");
+                if(Physics.Raycast(ray,out hit,Mathf.Infinity,spaceLayer))
+                {
+                    GameObject g = hit.transform.gameObject;
+                    Debug.Log("Clicked on " + g.GetComponent<SpaceObject>().SID);
+                    setSelectedSpace(g);
+                }
             }
-        }
-        //debug swap mode
-        if(selectedSpace!=null && Input.GetKeyDown(KeyCode.Space))
-        {
-            enableStageMode(selectedSpace);
+            //debug swap mode
+            if(selectedSpace!=null && Input.GetKeyDown(KeyCode.Space) && !isStageMode)
+            {
+                enableStageMode(selectedSpace);
+            }else if(selectedSpace!=null && Input.GetKeyDown(KeyCode.Space) && isStageMode)
+            {
+                disableStageMode(selectedSpace);
+            }
         }
         
     }
@@ -125,18 +162,58 @@ public class boardCon : MonoBehaviour
 
 
 
-    //perform all functions necessary 
+    //perform all functions necessary to set up and sync board controller and spaces states to enter stage mode, which is the mode in which the FPS minigame is played.
     public void enableStageMode(GameObject space)
     {
+        
         Debug.Log("Enabling Stage Mode");
+
+        //Debug ONLY
+        foreach(invEntity ie in fList)
+        {
+            ie.team=1;
+            fListToSend.Add(ie);
+        }
+        ///////////
+        isStageMode=true;
+        SpaceObject so = space.GetComponent<SpaceObject>();
+        //remove InvEntities from BC and send to spaceobject
+        foreach(invEntity ie in fListToSend.ToList())
+        {
+            so.fList.Add(ie);
+            fList.Remove(ie);
+            fListToSend.Remove(ie);
+        }
         //move and enabled Terra.
         terra.transform.position = new Vector3(selectedSpace.transform.position.x,selectedSpace.transform.position.y+100,selectedSpace.transform.position.z);
         terra.SetActive(true);
         setCamera(2);
+        mapCL.SetActive(false);
         //hand off stage enable to the space itself.
         space.GetComponent<SpaceObject>().enableStageMode();
+        Debug.Log("Done with BC ESM");
+    }
+
+    
+    //undo all things from enable stage mode.
+    public void disableStageMode(GameObject space)
+    {
+        mapCL.SetActive(true);
+        space.GetComponent<SpaceObject>().disableStageMode();
+
+        Debug.Log("Disabling Stage Mode");
+        isStageMode=false;
+
+        
+        //disable terra.
+        terra.SetActive(false);
+        
+        setCamera(1);
+        
+        
     }
     //set the current active vCam.
+
     private void setCamera(int x)
     {
         switch(x)

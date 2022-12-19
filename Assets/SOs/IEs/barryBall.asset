@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   go: {fileID: 7889855638260370057, guid: 23e50a4ea7619e242873aff1fee4f367, type: 3}
   threatCost: 14
+  team: 0

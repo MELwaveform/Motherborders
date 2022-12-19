@@ -8,5 +8,7 @@ public class invEntity : ScriptableObject
     public GameObject go;
     public float threatCost;
 
+    public int team;
+
     
 }

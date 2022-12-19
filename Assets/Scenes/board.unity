@@ -508,6 +508,7 @@ MonoBehaviour:
   zSpeed: 0
   yRotSpeed: 0
   moveSpeed: 100
+  bc: {fileID: 0}
 --- !u!212 &709625612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1118,6 +1119,7 @@ MonoBehaviour:
   mapCam: {fileID: 1635397088}
   terraCam: {fileID: 101434226}
   spaceCon: {fileID: 1554018490}
+  initComplete: 0
   mCam: {fileID: 1612466630}
   spaceLayer:
     serializedVersion: 2
@@ -1125,3 +1127,12 @@ MonoBehaviour:
   terra: {fileID: 95064289}
   isStageMode: 0
   selectedSpace: {fileID: 0}
+  fList: []
+  fListDebug:
+  - {fileID: 11400000, guid: 6384c166361cae74b9bb37193eabb5fd, type: 2}
+  - {fileID: 11400000, guid: 6384c166361cae74b9bb37193eabb5fd, type: 2}
+  - {fileID: 11400000, guid: 18d04319df3a992458ba5d532461d0df, type: 2}
+  - {fileID: 11400000, guid: 18d04319df3a992458ba5d532461d0df, type: 2}
+  - {fileID: 11400000, guid: 7895de9c75763694fb0d2dde5b1ee8fc, type: 2}
+  fListToSend: []
+  mapCL: {fileID: 709625609}

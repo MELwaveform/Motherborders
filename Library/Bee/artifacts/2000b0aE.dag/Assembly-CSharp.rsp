@@ -326,6 +326,7 @@
 "Assets/Scripts/SOcode/invEntity.cs"
 "Assets/Scripts/SOcode/space.cs"
 "Assets/Scripts/SpaceObject.cs"
+"Assets/Scripts/tempFriendlyObject.cs"
 "Assets/Scripts/terraController.cs"
 -langversion:9.0
 

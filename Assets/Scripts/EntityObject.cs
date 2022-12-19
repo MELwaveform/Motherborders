@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EntityObject : MonoBehaviour
 {
+
+    public int team;
+    public invEntity ie;
+
     // Start is called before the first frame update
     void Start()
     {

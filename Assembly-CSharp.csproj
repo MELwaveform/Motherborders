@@ -41,9 +41,10 @@
      <Compile Include="Assets\Scripts\mapCameraController.cs" />
      <Compile Include="Assets\Scripts\SOcode\space.cs" />
      <Compile Include="Assets\Scripts\autokill.cs" />
-     <Compile Include="Assets\Scripts\terraController.cs" />
      <Compile Include="Assets\Scripts\SOcode\invEntity.cs" />
      <Compile Include="Assets\Scripts\EntityObject.cs" />
+     <Compile Include="Assets\Scripts\terraController.cs" />
+     <Compile Include="Assets\Scripts\tempFriendlyObject.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity 2021.3.15f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
